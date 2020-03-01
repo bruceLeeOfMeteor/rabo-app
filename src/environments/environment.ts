@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  moduleConfig: {
+    employees: {
+      baseUrl: 'http://dummy.restapiexample.com/api/v1'
+    }
+  }
 };
 
 /*
