@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
+import { EmployeesModule } from './employees.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: EmployeesModule
 })
 export class EmployeesService {
   env = environment.moduleConfig.employees;
