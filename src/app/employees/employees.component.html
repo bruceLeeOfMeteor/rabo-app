@@ -1,4 +1,17 @@
-<h4>All employees</h4>
-<div *ngFor="let employee of employees$ | async">
-  {{ employee | json }}
-</div>
+<mat-sidenav-container>
+  <mat-sidenav class="employees-list-sidenav" mode="side" [opened]="true" [fixedInViewport]="true" #employeesSidenav>
+    <mat-toolbar color="primary">Employees</mat-toolbar>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let employee of employees$ | async; let i = index"
+        [routerLink]=""
+        routerLinkActive="active-employee"
+        >{{ employee.employee_name }}</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="accent">Employee Details</mat-toolbar>
+  <div class="employee-wrapper">Employee details</div>
+</mat-sidenav-container>

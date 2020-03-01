@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeesComponent } from './employees.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
+import { AppMaterialModule } from '../app-material.module';
 
 @NgModule({
   declarations: [EmployeesComponent],
-  imports: [CommonModule, EmployeesRoutingModule, HttpClientModule]
+  imports: [CommonModule, EmployeesRoutingModule, HttpClientModule, AppMaterialModule]
 })
 export class EmployeesModule {}
