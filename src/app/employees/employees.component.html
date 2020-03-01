@@ -1,5 +1,11 @@
 <mat-sidenav-container>
-  <mat-sidenav class="employees-list-sidenav" mode="side" [opened]="true" [fixedInViewport]="true" #employeesSidenav>
+  <mat-sidenav
+    class="employees-list-sidenav"
+    [mode]="sidenavMode"
+    [opened]="!isSmallScreen"
+    [fixedInViewport]="true"
+    #employeesSidenav
+  >
     <mat-toolbar color="primary">Employees</mat-toolbar>
     <mat-nav-list>
       <a
