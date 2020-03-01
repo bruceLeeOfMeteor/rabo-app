@@ -1,1 +1,4 @@
-<p>employees works!</p>
+<h4>All employees</h4>
+<div *ngFor="let employee of employees$ | async">
+  {{ employee | json }}
+</div>
