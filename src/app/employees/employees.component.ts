@@ -15,6 +15,8 @@ import { Employee } from './interfaces/employee';
 export class EmployeesComponent implements OnInit {
   isSmallScreen: boolean;
   employees$: Observable<Employee[]>;
+  isLoadingList = true;
+  isLoadingDetails = true;
 
   selectedEmployeeId: string; // needed for highlighting selected employee in a list
   selectedEmployeeIdSubject: BehaviorSubject<string> = new BehaviorSubject('');
@@ -32,13 +34,15 @@ export class EmployeesComponent implements OnInit {
       .pipe(pluck('matches'))
       .subscribe((m: boolean) => (this.isSmallScreen = m));
 
-    this.employees$ = this.employeesService.getList();
+    this.employees$ = this.employeesService.getList().pipe(tap(_ => (this.isLoadingList = false)));
 
     this.selectedEmployee$ = this.selectedEmployeeIdSubject.pipe(
+      tap(_ => (this.isLoadingDetails = true)),
       tap(id => (this.selectedEmployeeId = id)),
       mergeMap(_ => this.employeesService.getList()), // ideally endpoint should be called with id parameter (Eg: getItem(id))
       tap(list => (this.selectedEmployeeId = !!this.selectedEmployeeId ? this.selectedEmployeeId : list[0].id)),
-      map(list => list.find(employee => employee.id === this.selectedEmployeeId))
+      map(list => list.find(employee => employee.id === this.selectedEmployeeId)),
+      tap(_ => (this.isLoadingDetails = false))
     );
   }
 

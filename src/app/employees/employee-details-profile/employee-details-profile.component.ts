@@ -8,4 +8,5 @@ import { Employee } from '../interfaces/employee';
 })
 export class EmployeeDetailsProfileComponent {
   @Input() employee: Employee;
+  @Input() isLoading: boolean;
 }
