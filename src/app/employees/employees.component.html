@@ -22,6 +22,10 @@
   <div class="employee-wrapper">Employee details</div>
 </mat-sidenav-container>
 
+<button class="add-employee-button" mat-mini-fab color="secondary" (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+</button>
+
 <button
   *ngIf="isSmallScreen"
   class="sidenav-toggle"

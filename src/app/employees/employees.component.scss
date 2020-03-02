@@ -7,9 +7,15 @@
   width: 300px;
 }
 
-.sidenav-toggle {
+.add-employee-button {
   position: fixed;
   right: 20px;
   bottom: 10px;
+  z-index: 4;
+}
+.sidenav-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
   z-index: 4;
 }
