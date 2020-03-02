@@ -23,6 +23,8 @@ export class EmployeesComponent implements OnInit {
   selectedEmployeeIdSubject: BehaviorSubject<string> = new BehaviorSubject('');
   selectedEmployee$: Observable<Employee>;
 
+  searchQuery: string;
+
   constructor(
     private employeesService: EmployeesService,
     private _breakpointObserver: BreakpointObserver,
@@ -54,6 +56,14 @@ export class EmployeesComponent implements OnInit {
 
   selectEmployee(id: string) {
     this.selectedEmployeeIdSubject.next(id);
+  }
+
+  search(query: string) {
+    this.searchQuery = query;
+  }
+
+  filterEmplyees(employees: Employee[], query): Employee[] {
+    return employees.filter(employee => !query || employee.employee_name.includes(query));
   }
 
   openDialog(): void {
