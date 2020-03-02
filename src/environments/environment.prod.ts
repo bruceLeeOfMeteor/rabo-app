@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   moduleConfig: {
     employees: {
-      baseUrl: 'http://dummy.restapiexample.com/api/v1'
+      baseUrl: 'https://dummy.restapiexample.com/api/v1'
     }
   }
 };
