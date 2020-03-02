@@ -3,9 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeesComponent } from './employees.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list' },
   {
-    path: 'list',
+    path: '',
     component: EmployeesComponent
   }
 ];
