@@ -4,7 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { pluck, map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEmployeeDialogComponent } from './create-employee-dialog/create-employee-dialog.component';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { Employee } from './interfaces/employee';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -73,13 +73,10 @@ export class EmployeesComponent implements OnInit {
 
     dialogRef
       .afterClosed()
-      .pipe(mergeMap(data => this.employeesService.create(data)))
-      .subscribe(response => {
-        const message =
-          response && response['status'] === 'success'
-            ? 'New employee has successfully been added'
-            : 'Oops, something went wrong';
-        this._snackBar.open(message, 'OK', { duration: 2000 });
-      });
+      .pipe(mergeMap(data => (data ? this.employeesService.create(data) : of())))
+      .subscribe(
+        response => this._snackBar.open('New employee has successfully been added', 'OK', { duration: 2000 }),
+        error => this._snackBar.open('Oops, something went wrong', 'OK', { duration: 2000 })
+      );
   }
 }
