@@ -62,7 +62,7 @@ export class EmployeesComponent implements OnInit {
     this.searchQuery = query;
   }
 
-  filterEmplyees(employees: Employee[], query): Employee[] {
+  filterEmployees(employees: Employee[], query): Employee[] {
     return employees.filter(employee => !query || employee.employee_name.includes(query));
   }
 

@@ -13,7 +13,7 @@
       <ng-container *ngIf="employees$ | async as employees">
         <a
           mat-list-item
-          *ngFor="let employee of filterEmplyees(employees, searchQuery)"
+          *ngFor="let employee of filterEmployees(employees, searchQuery)"
           (click)="selectEmployee(employee.id)"
           [ngClass]="{ 'active-employee': selectedEmployeeId === employee.id }"
           >{{ employee.employee_name }}</a
