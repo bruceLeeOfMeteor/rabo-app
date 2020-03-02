@@ -21,3 +21,14 @@
   <mat-toolbar color="accent">Employee Details</mat-toolbar>
   <div class="employee-wrapper">Employee details</div>
 </mat-sidenav-container>
+
+<button
+  *ngIf="isSmallScreen"
+  class="sidenav-toggle"
+  mat-mini-fab
+  color="primary"
+  [@growInOut]="'in'"
+  (click)="employeesSidenav.toggle()"
+>
+  <mat-icon>view_list</mat-icon>
+</button>
