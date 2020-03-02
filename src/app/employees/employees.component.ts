@@ -56,7 +56,7 @@ export class EmployeesComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateEmployeeDialogComponent, {
-      width: '250px'
+      width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

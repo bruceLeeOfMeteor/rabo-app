@@ -6,9 +6,10 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { AppMaterialModule } from '../app-material.module';
 import { CreateEmployeeDialogComponent } from './create-employee-dialog/create-employee-dialog.component';
 import { EmployeeDetailsProfileComponent } from './employee-details-profile/employee-details-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [EmployeesComponent, CreateEmployeeDialogComponent, EmployeeDetailsProfileComponent],
-  imports: [CommonModule, EmployeesRoutingModule, HttpClientModule, AppMaterialModule]
+  imports: [CommonModule, EmployeesRoutingModule, HttpClientModule, AppMaterialModule, FormsModule, ReactiveFormsModule]
 })
 export class EmployeesModule {}

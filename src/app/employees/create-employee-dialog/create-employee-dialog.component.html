@@ -1,8 +1,56 @@
-<h1 mat-dialog-title>Create</h1>
-<div mat-dialog-content>
-  <p>Add new employee</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button cdkFocusInitial>Create</button>
-</div>
+<form class="employee-form" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>Create</h1>
+  <div mat-dialog-content>
+    <p>Add new employee</p>
+
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        [formControl]="nameFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="Full name"
+        matInput
+        required
+      />
+      <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
+        Only letters and space is allowed
+      </mat-error>
+      <mat-error *ngIf="nameFormControl.hasError('required')"> Name is <strong>required</strong> </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        [formControl]="ageFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="Age"
+        matInput
+        required
+      />
+      <mat-error *ngIf="ageFormControl.hasError('pattern') && !ageFormControl.hasError('required')">
+        Only digits are allowed
+      </mat-error>
+      <mat-error *ngIf="ageFormControl.hasError('required')"> Age is <strong>required</strong> </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        type="text"
+        [formControl]="salaryFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="Salary"
+        matInput
+        required
+      />
+      <mat-error *ngIf="salaryFormControl.hasError('pattern') && !salaryFormControl.hasError('required')">
+        Only digits are allowed
+      </mat-error>
+      <mat-error *ngIf="salaryFormControl.hasError('required')"> Salary is <strong>required</strong> </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button type="submit" cdkFocusInitial>Create</button>
+  </div>
+</form>
