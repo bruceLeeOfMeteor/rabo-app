@@ -5,9 +5,10 @@ import { EmployeesComponent } from './employees.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { AppMaterialModule } from '../app-material.module';
 import { CreateEmployeeDialogComponent } from './create-employee-dialog/create-employee-dialog.component';
+import { EmployeeDetailsProfileComponent } from './employee-details-profile/employee-details-profile.component';
 
 @NgModule({
-  declarations: [EmployeesComponent, CreateEmployeeDialogComponent],
+  declarations: [EmployeesComponent, CreateEmployeeDialogComponent, EmployeeDetailsProfileComponent],
   imports: [CommonModule, EmployeesRoutingModule, HttpClientModule, AppMaterialModule]
 })
 export class EmployeesModule {}

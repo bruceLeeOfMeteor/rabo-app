@@ -1,0 +1,18 @@
+<mat-grid-list cols="4" rows="1">
+  <mat-grid-tile>
+    <img class="employee-avatar" [src]="employee.profile_image || './assets/images/avatar-default.png'" alt="avatar" />
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="3">
+    <mat-card class="employee-card">
+      <mat-card-title *ngIf="employee.employee_name as name">{{ name }}</mat-card-title>
+      <mat-card-subtitle *ngIf="employee.employee_age as age">{{ age }} years old</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>
+          Annual salary:
+          <span *ngIf="employee.employee_salary as salary">{{ salary | currency: 'EUR' }}</span> per year
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
