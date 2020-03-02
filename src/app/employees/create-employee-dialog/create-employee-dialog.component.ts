@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { EmployeeData } from '../interfaces/employee';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,5 +31,13 @@ export class CreateEmployeeDialogComponent implements OnInit {
   onCancelClick(): void {
     this.dialogRef.close();
   }
-  onSubmit(): void {}
+  onSubmit(): void {
+    if (this.nameFormControl.valid && this.ageFormControl.value && this.salaryFormControl.value) {
+      this.dialogRef.close({
+        name: this.nameFormControl.value,
+        age: this.ageFormControl.value,
+        salary: this.salaryFormControl.value
+      } as EmployeeData);
+    }
+  }
 }

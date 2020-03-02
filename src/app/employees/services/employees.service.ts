@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
-import { Employee } from '../interfaces/employee';
+import { Employee, EmployeeData } from '../interfaces/employee';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class EmployeesService {
       map(response => response?.data || [])
     );
   }
-  create() {
-    return this.http.post(`${this.env.baseUrl}/create`, {});
+  create(data: EmployeeData) {
+    return this.http.post(`${this.env.baseUrl}/create`, data);
   }
 }
 

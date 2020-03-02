@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeesService } from './services/employees.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { pluck, map, mergeMap, tap } from 'rxjs/operators';
+import { pluck, map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateEmployeeDialogComponent } from './create-employee-dialog/create-employee-dialog.component';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Employee } from './interfaces/employee';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employees',
@@ -25,7 +26,8 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private employeesService: EmployeesService,
     private _breakpointObserver: BreakpointObserver,
-    public dialog: MatDialog
+    private _snackBar: MatSnackBar,
+    public _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -55,12 +57,19 @@ export class EmployeesComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateEmployeeDialogComponent, {
+    const dialogRef = this._dialog.open(CreateEmployeeDialogComponent, {
       width: '600px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ', result);
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(mergeMap(data => this.employeesService.create(data)))
+      .subscribe(response => {
+        const message =
+          response && response['status'] === 'success'
+            ? 'New employee has successfully been added'
+            : 'Oops, something went wrong';
+        this._snackBar.open(message, 'OK', { duration: 2000 });
+      });
   }
 }
