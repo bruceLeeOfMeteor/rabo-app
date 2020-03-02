@@ -11,15 +11,17 @@
       <a
         mat-list-item
         *ngFor="let employee of employees$ | async; let i = index"
-        [routerLink]=""
-        routerLinkActive="active-employee"
+        (click)="selectEmployee(employee.id)"
+        [ngClass]="{ 'active-employee': selectedEmployeeId === employee.id }"
         >{{ employee.employee_name }}</a
       >
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-toolbar color="accent">Employee Details</mat-toolbar>
-  <div class="employee-wrapper">Employee details</div>
+  <div class="employee-wrapper">
+    <ng-container *ngIf="selectedEmployee$ | async as employee">{{ employee | json }}</ng-container>
+  </div>
 </mat-sidenav-container>
 
 <button class="add-employee-button" mat-mini-fab color="secondary" (click)="openDialog()">
