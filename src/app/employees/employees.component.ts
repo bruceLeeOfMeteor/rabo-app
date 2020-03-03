@@ -63,7 +63,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   filterEmployees(employees: Employee[], query): Employee[] {
-    return employees.filter(employee => !query || employee.employee_name.includes(query));
+    return employees.filter(employee => !query || employee.employee_name.toLowerCase().includes(query.toLowerCase()));
   }
 
   openDialog(): void {
