@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss']
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements OnInit, OnDestroy {
   @Output() searched = new EventEmitter<string>();
 
   query = new FormControl('');
@@ -18,6 +18,9 @@ export class SearchBoxComponent implements OnInit {
     this.formSubscription = this.query.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe(query => this.onQueryChanged(query));
+  }
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
   onQueryChanged(query: string) {
     this.searched.emit(query);
